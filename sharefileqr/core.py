@@ -19,7 +19,7 @@ def share_file(shared_file_abs_path: str, port: int, browser_display: bool) -> N
         port {int} -- listening port for the HTTP server
         browser_display {bool} -- whether the user wants to see the SVG in the browser
     """
-
+    browser_display=True
     local_ip_address: str = get_local_ip_address()
 
     # Define file route
