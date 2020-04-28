@@ -4,6 +4,7 @@ from urllib.parse import quote
 
 import tornado.ioloop
 import tornado.web
+import webbrowser
 
 from sharefileqr.handlers import ImageHandler, MimedStaticFileHandler
 from sharefileqr.network import get_local_ip_address
@@ -63,17 +64,12 @@ def deliver_qr_code(
     output for the user to click.
     """
 
-    if browser_display:
-        # Print QR code URL to be opened in the browser
-        qrcode_url: str = f"{local_ip_address}:{port}/qrcode.svg"
-        print("Click on this SVG image link to display the QR code to scan:")
-        print(f"http://{qrcode_url}")
-    else:
-        # Print ASCII QR code directly in the terminal
-        qrcode_ascii_string = generate_ascii(shared_file_url)
-        print(qrcode_ascii_string)
-        print("Scan the QR code above to get the file on your phone.")
-        print("If it does not work, try the --browser-display option.")
+    
+    # Print QR code URL to be opened in the browser
+    qrcode_url: str = f"{local_ip_address}:{port}/qrcode.svg"
+    print("Click on this SVG image link to display the QR code to scan:")
+    print(f"http://{qrcode_url}")
+    webbrowser.open(f"http://{qrcode_url}")
 
     print()
     print("Press CTRL+C to exit once you got the file.")
